@@ -9,9 +9,11 @@
  *    Print something on serial: Serial.println("  ");
 */
 #include <PinchyWifi.h>
+#include <PinchyMatrix.h>
 #include <Servo.h>
 
 PinchyWifi Wifi;
+PinchyMatrix pm = PinchyMatrix(16,15,17);
 
 char r;
 String R;
@@ -23,11 +25,15 @@ Servo rueda2;
 void setup()  {
   Serial.begin(9600);
   Serial1.begin(115200);
+  pinMode(2, OUTPUT);
   rueda1.attach(5);
   rueda2.attach(6);
   pinMode( 9, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
+
+  pm.shutdown(false);
+  pm.setIntensity(8);
   //Setup for the servers and multiple connections.
   digitalWrite(11, HIGH);
   delay(3000);
@@ -44,12 +50,14 @@ void setup()  {
 void loop(){
    while(Serial1.available() ) {
       r = Serial1.read();
-      if(r == 71){
+      if(r == 71)
         b = true;
-      }
       
       Serial.print(r);
       R = R + r;
+      
+      if(r == '\n')
+        break;
    }
  
   while(Serial.available() ) {
@@ -65,7 +73,7 @@ void loop(){
     R = "";
   }
   
-  if(r == '\n')
+  else if(r == '\n')
     R = "";
 
   if(b){
@@ -79,96 +87,40 @@ void loop(){
 //****************************************************************************
 //****************************************************************************
 void commands(String command){
-  if(command.startsWith("LED_")){
-    if(command.equalsIgnoreCase("LED_rojo"))
-      digitalWrite(11, !digitalRead(11) );
-
-    else if(command.equalsIgnoreCase("LED_verde"))
-      digitalWrite(9, !digitalRead(9) );
-
-    else if(command.equalsIgnoreCase("LED_azul"))
-      digitalWrite(10, !digitalRead(10) );
+  if(command.startsWith("LED?color=")){
+      if(command.equals("LED?color=red"))
+        digitalWrite(11, !digitalRead(11) );
+  
+      else if(command.equals("LED?color=green"))
+        digitalWrite(9, !digitalRead(9) );
+  
+      else if(command.equals("LED?color=blue"))
+        digitalWrite(10, !digitalRead(10) );
   }
 
-  else if(command.startsWith("adelante")){
-    String ss = command.substring(8);
-    int sec = ss.toInt();
-    rueda1.write(0);
-    rueda2.write(180);
-    switch (sec){
-      case 1:
-        delay(1000);
-        break;
-      case 2:
-        delay(2000);
-        break;
-      case 3:
-        delay(3000);
-        break;
-      case 4:
-        delay(4000);
-        break;
-      case 5:
-        delay(5000);
-        break;
-      case 6:
-        delay(6000);
-        break;
-      case 7:
-        delay(7000);
-        break;
-      case 8:
-        delay(8000);
-        break;
-      case 9:
-        delay(9000);
-        break;
-      default:
-        delay(1000);
-        break;
-    }
-    rueda1.write(90);
-    rueda2.write(90);
+  else if(command.startsWith("BUZZER?sound=")){
+      if(command.equals("BUZZER?sound=ON"))
+        digitalWrite(2, HIGH );
+  
+      else if(command.equals("BUZZER?sound=OFF"))
+        digitalWrite(2, LOW );
   }
-  else if(command.startsWith("atras")){
-    String ss = command.substring(5);
-    int sec = ss.toInt();
-    rueda1.write(180);
-    rueda2.write(0);
-    switch (sec){
-      case 1:
-        delay(1000);
-        break;
-      case 2:
-        delay(2000);
-        break;
-      case 3:
-        delay(3000);
-        break;
-      case 4:
-        delay(4000);
-        break;
-      case 5:
-        delay(5000);
-        break;
-      case 6:
-        delay(6000);
-        break;
-      case 7:
-        delay(7000);
-        break;
-      case 8:
-        delay(8000);
-        break;
-      case 9:
-        delay(9000);
-        break;
-      default:
-        delay(1000);
-        break;
-    }
-    rueda1.write(90);
-    rueda2.write(90);
+
+  else if(command.startsWith("LCD?Number=")){
+      String n = command.substring(11);
+      int num = n.toInt();
+      pm.number(num);
+  }
+
+  else if(command.startsWith("ADELANTE?seg=")){
+      String z = command.substring(13);
+      int sec = z.toInt();
+      rueda1.write(0);
+      rueda2.write(180);
+      delay(sec*1000);
+      rueda1.write(90);
+      rueda2.write(90);
   }
 }
+
 
