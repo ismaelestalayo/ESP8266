@@ -97,7 +97,7 @@ void commands(String command){
       else if(command.equals("LED?color=blue"))
         digitalWrite(10, !digitalRead(10) );
   }
-
+  
   else if(command.startsWith("BUZZER?sound=")){
       if(command.equals("BUZZER?sound=ON"))
         digitalWrite(2, HIGH );
