@@ -10,5 +10,4 @@ class PinchyWifi
     void webServer(void);
 };
 
-
 #endif

@@ -18,8 +18,9 @@ void PinchyWifi::webServer(){
 http("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
 http("<link rel=\"shortcut icon\" href=\"data:image/x-icon;,\" type=\"image/x-icon\"> ");
 
-http("<!DOCTYPE HTML>");
-http("<html>"
+http(
+"<!DOCTYPE HTML>"
+"<html>"
 "<head><title>ESP8266</title></head>"
 "<body><font face=\"Segoe UI light\">");
 
