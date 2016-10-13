@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head><title>ESP8266</title></head>
+<body><font face="Segoe UI light">
+<div style="max-width: 400px" >
+<img src="http://bilbaodynamics.com/wp-content/uploads/2016/04/pusheengif.gif" style="max-width:100%;"/></div>
+
+<form action="LED" method="get">
+LED color:
+  <button name="color" type="submit" value="red">Red</button>
+  <button name="color" type="submit" value="green">Green</button>
+  <button name="color" type="submit" value="blue">Blue</button>
+</form>
+
+<form action="BUZZER" method="get">
+  Buzzer:"
+  <button name="sound" type="submit" value="ON">On</button>
+  <button name="sound" type="submit" value="OFF">Off</button>
+</form>
+
+<form action="LCD">
+Nº de Pinchy: <input type="text" name="Number" value=""><br>
+<input type="submit" value="Submit">
+</form>
+
+<form action="CARITA" method="get">
+  Carita:
+  <button name="expresion" type="submit" value="feliz">Feliz</button>
+  <button name="expresion" type="submit" value="triste">Triste</button>
+  <button name="expresion" type="submit" value="gatete">Gatete</button>
+</form>
+
+<form action="ADELANTE">
+"Adelante (1-9seg):
+"  <input type="number" name="seg" min="1" max="9">
+"  <input type="submit"></form>
+
+</font></body></html>
