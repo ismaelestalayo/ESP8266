@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+
 <head><title>ESP8266</title></head>
 <body><font face="Segoe UI light">
 <div style="max-width: 400px" >
@@ -9,53 +10,32 @@
 body{
   background-color: lightblue;
 }
-.red {
-    background-color: #FF0000;
+.button {
+    background-color: #EE0000;
     border: none;
     color: white;
-    padding: 5px 20px;
+    padding: 3px 15px;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
-    font-size: 13px;
-    margin: 2px 2px;
+    font-size: 16px;
+    margin: 4px 2px;
     cursor: pointer;
 }
-.green {
-    background-color: #00FF00;
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-    margin: 2px 2px;
-    cursor: pointer;
-}
-.blue {
-    background-color: #0000FF;
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-    margin: 2px 2px;
-    cursor: pointer;
-}
+.buttonRed {background-color: #f44336; }
+.buttonRed:hover{background-color: #FFFFFF}
+.buttonGreen {background-color: #4CAF50; }
+.buttonBlue {background-color: #008CBA; }
 </style>
 
 <form action="LED" method="get">
-LED color:
-	<button name="color" class="red" type="submit" value="red">Red</button>
-	<button name="color" class="green" type="submit" value="green">Green</button>
-  <button name="color" class="blue" type="submit" value="blue">Blue</button>
+  LED color:
+	<button name="color" class="button buttonRed" type="submit" value="red">Red</button>
+	<button name="color" class="button buttonGreen" type="submit" value="green">Green</button>
+  <button name="color" class="button buttonBlue" type="submit" value="blue">Blue</button>
 </form>
 
 <form action="BUZZER" method="get">
-	Buzzer:
+  Buzzer:
 	<button name="sound" type="submit" value="ON">On</button>
 	<button name="sound" type="submit" value="OFF">Off</button>
 </form>
@@ -63,7 +43,7 @@ LED color:
 <form action="LCD">
 	Nº de Pinchy:
 	<input type="text" name="Number" value=""><br>
-<input type="submit" value="Submit">
+  <!--  <input type="submit"  -->
 </form>
 
 <form action="CARITA" method="get">
@@ -78,6 +58,32 @@ LED color:
   <input type="number" name="seg" min="1" max="9">
   <input type="submit"></form>
 
-</font></body>
+  <div id="joystick" style="width:20%">
+    <svg width="100%" height="100%" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgb(16,16,16);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(240,240,240);stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgb(240,240,240);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(16,16,16);stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgb(168,168,168);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(239,239,239);stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="50" fill="url(#grad1)" />
+      <circle cx="50" cy="50" r="47" fill="url(#grad2)" stroke="black" stroke-width="1.5px" />
+      <circle cx="50" cy="50" r="44" fill="url(#grad3)" />
+      <circle cx="50" cy="50" r="20" fill="#cccccc" stroke="black" stroke-width="1px" onclick="alert('STOP');" />
+      <path d="M50,14 54,22 46,22Z" fill="rgba(0,0,0,0.8)" onclick="alert('UP');" />
+      <path d="M50,86 54,78 46,78Z" fill="rgba(0,0,0,0.8)" onclick="alert('DOWN');" />
+      <path d="M14,50 22,54 22,46Z" fill="rgba(0,0,0,0.8)" onclick="alert('LEFT');" />
+      <path d="M86,50 78,54 78,46Z" fill="rgba(0,0,0,0.8)" onclick="location.href='192.168.4.1/ADELANTE?seg=5' ;" />
+    </svg>
+  </div>
 
+</font></body>
 </html>
