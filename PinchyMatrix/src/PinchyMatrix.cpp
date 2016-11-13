@@ -370,6 +370,33 @@ void PinchyMatrix::downArrow(){
 	setMatrix();
 }
 
+void PinchyMatrix::equals(){
+  f[4] = B00000000;
+	f[3] = B00111110;
+	f[2] = B00000000;
+	f[1] = B00111110;
+	f[0] = B00000000;
+  setMatrix();
+}
+
+void PinchyMatrix::FBplus1(){
+  f[4] = B00000010;
+	f[3] = B00100110;
+	f[2] = B01110010;
+	f[1] = B00100010;
+	f[0] = B00000111;
+  setMatrix();
+}
+
+void PinchyMatrix::FBlike(){
+  f[4] = B00011000;
+	f[3] = B00011000;
+	f[2] = B01111110;
+	f[1] = B01111110;
+	f[0] = B01111110;
+  setMatrix();
+}
+
 void PinchyMatrix::binary(String bin){
   int k = 0, z = 0;
   f[0] = B00000000;

@@ -197,6 +197,13 @@ class PinchyMatrix {
 	void leftArrow();
 	void upArrow();
 	void downArrow();
+
+  //Extra
+  void equals();
+  void FBplus1();
+  void FBlike();
+
+  //TEMP just for testing
   void binary(String bin);
 
 };
