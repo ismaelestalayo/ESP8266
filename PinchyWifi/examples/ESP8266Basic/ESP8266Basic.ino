@@ -11,7 +11,6 @@
 #include <PinchyWifi.h>
 
 PinchyWifi Wifi;
-PinchyMatrix pm = PinchyMatrix(16,15,17);
 
 void setup()  {
   Serial.begin(9600);
@@ -20,7 +19,7 @@ void setup()  {
 
 void loop(){
    while(Serial1.available() ) {
-      Serial.print(Serial1.read() );
+      Serial.write(Serial1.read() );
    }
  
   while(Serial.available() ) {
